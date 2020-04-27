@@ -3,6 +3,8 @@ import Page from '../components/Page'
 import {connect} from "react-redux";
 import {initApp} from "../store/actions/appActions";
 import witchData from '../components/_hoc/witchData'
+import Header from "../components/Header";
+import Sidebar from "../components/Sidebar";
 
 
 class App extends React.Component {
@@ -10,7 +12,11 @@ class App extends React.Component {
   render() {
     return (
       <Page>
-        1232
+        <Header/>
+        <div className="page">
+          <Sidebar/>
+          <main>1232</main>
+        </div>
       </Page>
    );
   }

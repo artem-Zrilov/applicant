@@ -1,0 +1,27 @@
+.login-registration-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 604px;
+    max-width: 464px;
+    padding: 38px 56px 14px;
+    background: #FFFFFF;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    transform: translate(-50%, -50%);
+}
+
+.login-registration-form__logo {
+    display: block;
+    width: 106px;
+    height: 70px;
+    margin: 0 auto;
+}
+
+.login-registration-form__title {
+    margin: 16px auto 39px;
+    font-weight: 500;
+    font-size: 24px;
+    color: #565252;
+    text-align: center;
+}

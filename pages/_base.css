@@ -12,12 +12,6 @@
     box-sizing: border-box;
 }
 
-:root {
-    --breakpoint--desktop: 1440px;
-    --breakpoint--laptop: 1200px;
-    --breakpoint--tablet: 768px;
-}
-
 html,
 body {
     font-family: "Roboto", sans-serif;
