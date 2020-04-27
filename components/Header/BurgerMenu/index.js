@@ -1,4 +1,4 @@
-import "./index.sass"
+import "./index.css"
 import React from 'react'
 
 const BurgerMenu = () => {

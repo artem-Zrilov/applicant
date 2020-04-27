@@ -1,0 +1,35 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('/fonts/Roboto.woff2') format('woff2'),
+    url('/fonts/Roboto.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --breakpoint--desktop: 1440px;
+    --breakpoint--laptop: 1200px;
+    --breakpoint--tablet: 768px;
+}
+
+html,
+body {
+    font-family: "Roboto", sans-serif;
+}
+
+#__next {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.page {
+    display: flex;
+    flex-grow: 1;
+}

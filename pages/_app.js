@@ -1,5 +1,5 @@
 
-import './_base.sass'
+import './_base.css'
 import React from 'react'
 import { Provider } from 'react-redux'
 import App from 'next/app'

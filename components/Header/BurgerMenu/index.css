@@ -1,0 +1,20 @@
+.header__burger-menu-icon {
+    width: 30px;
+    height: 21px;
+}
+
+.header__burger-menu-icon span {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background: #877F7F;
+}
+
+.header__burger-menu-icon span:first-child {
+    width: 18px;
+    margin-left: auto;
+}
+
+.header__burger-menu-icon span:not(:last-child) {
+    margin-bottom: 6px;
+}

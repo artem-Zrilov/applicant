@@ -1,0 +1,27 @@
+.header__profile {
+    display: flex;
+    align-items: center;
+}
+
+.header__profile-picture {
+    display: block;
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+}
+
+.header__profile-data {
+    margin-left: 11px;
+}
+
+.header__profile-name {
+    font-size: 18px;
+    line-height: 21px;
+    color: #3F3C3C;
+}
+
+.header__profile-role {
+    font-size: 12px;
+    line-height: 14px;
+    color: #3F3C3C;
+}
