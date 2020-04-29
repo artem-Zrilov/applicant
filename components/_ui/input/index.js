@@ -1,7 +1,8 @@
-import React from 'react';
+import './input.css'
+import React, { useState } from 'react';
 import cx from 'classnames'
 
-export const Input = ({type, name, value, onChange, onBlur, error, disabled, className}) => {
+export const Input = ({type, name, value, onChange, onBlur, error, disabled, className, placeholder}) => {
 
   return (
     <input
@@ -15,6 +16,7 @@ export const Input = ({type, name, value, onChange, onBlur, error, disabled, cla
       onChange={onChange}
       onBlur={onBlur}
       disabled={disabled}
+      placeholder={placeholder}
     />
   )
 }

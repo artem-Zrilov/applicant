@@ -25,3 +25,40 @@
     color: #565252;
     text-align: center;
 }
+
+.login-registration-form__field {
+    margin-bottom: 25px;
+}
+
+.login-registration-form__field--margin--none {
+    margin-bottom: 0;
+}
+
+.login-registration-form__reset-password {
+    margin-top: 9px;
+    margin-bottom: 55px;
+    font-weight: 300;
+    font-size: 12px;
+    color: #6A6262;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.login-registration-form__reset-password:hover{
+    color: #06517D;
+}
+
+.login-registration-form__buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-top: 35px;
+}
+
+.login-registration-form__link {
+
+    font-size: 12px;
+    color: #0277BD;
+    cursor: pointer;
+}
