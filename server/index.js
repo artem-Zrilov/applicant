@@ -9,6 +9,9 @@ const handle = app.getRequestHandler();
 app.prepare()
    .then(() => {
      const server = express();
+     const apiRoutes = require("./router/index.js");
+
+     server.use("/api", apiRoutes)
 
      server.get("*", (req, res) => {
        return handle(req, res)

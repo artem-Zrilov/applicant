@@ -100,6 +100,7 @@ const LoginRegistrationForm = () => {
      </div>
      {fields.map((item, key) => (
       <Input
+       kwy={item.name}
        className={cx('login-registration-form__field', {
          'login-registration-form__field--margin--none': fields.length - 1 === key
        })}
@@ -108,7 +109,7 @@ const LoginRegistrationForm = () => {
        name={item.name}
       />
      ))}
-     {currentForm === "login" && (
+     {currentForm === LOGIN_FORM && (
       <div className="login-registration-form__reset-password">
         {TEXT_RESET_PASSWORD}
       </div>
@@ -125,6 +126,15 @@ const LoginRegistrationForm = () => {
          {TEXT_ENTER}
        </Button>
      </div>
+     { currentForm === REGISTRATION_FORM && (
+      <div className="login-registration-form__pagination">
+        {Object.keys(state[currentForm]).map((item, key) => (
+         <div key={key} className={cx("login-registration-form__pagination-item", {
+           "login-registration-form__pagination-item--active": key === step
+         })}/>
+        ))}
+      </div>
+     )}
    </div>
   );
 };

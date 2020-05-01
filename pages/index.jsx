@@ -1,10 +1,9 @@
 import React from 'react';
 import Page from '../components/Page'
-import {connect} from "react-redux";
-import {initApp} from "../store/actions/appActions";
 import witchData from '../components/_hoc/witchData'
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
+import ApplicantsTable from '../components/AplicantsTable'
 
 
 class App extends React.Component {
@@ -15,7 +14,9 @@ class App extends React.Component {
         <Header/>
         <div className="page">
           <Sidebar/>
-          <main>1232</main>
+          <main className="main">
+            <ApplicantsTable/>
+          </main>
         </div>
       </Page>
    );

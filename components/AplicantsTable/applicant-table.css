@@ -1,0 +1,49 @@
+.applicants-table {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.applicants-table__container {
+    border-collapse: collapse;
+}
+
+.applicants-table__container thead {
+    text-align: center;
+}
+
+.applicants-table__container tr,
+.applicants-table__container td {
+    border: 1px solid black;
+}
+
+.applicants-table__container td {
+    padding: 10px 20px;
+}
+
+.applicants-table__number {
+    width: 65px
+}
+
+.applicants-table__fullname {
+    min-width: 210px;
+}
+
+.applicants-table__point {
+    width: 95px;
+}
+
+.applicants-table__volunteer,
+.applicants-table__olympiads,
+.applicants-table__sport,
+.applicants-table__reference,
+.applicants-table__hostel,
+.applicants-table__reference-college{
+    width: 100px;
+}
+
+.applicants-table__status,
+.applicants-table__language{
+    width: 130px;
+}

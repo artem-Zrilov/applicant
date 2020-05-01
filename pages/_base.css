@@ -46,3 +46,7 @@ body {
     display: flex;
     flex-grow: 1;
 }
+
+.main {
+    flex-grow: 1;
+}
