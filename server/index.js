@@ -11,7 +11,8 @@ app.prepare()
      const server = express();
      const apiRoutes = require("./router/index.js");
 
-     server.use("/api", apiRoutes)
+     server.use("/api", apiRoutes);
+     server.use('/uploads', express.static(__dirname + '/uploads'));
 
      server.get("*", (req, res) => {
        return handle(req, res)
