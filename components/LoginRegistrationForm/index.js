@@ -11,7 +11,8 @@ const TEXT_ENTER = "Вход";
 const TEXT_CREATE_ACCOUNT = "Создать аккаунт";
 const TEXT_BACK = "Назад";
 const TEXT_END = "Завершить";
-const TEXT_RESET_PASSWORD = "Забыли пароль?"
+const TEXT_NEXT = "Дальше";
+const TEXT_RESET_PASSWORD = "Забыли пароль?";
 
 const linkText = {
   [LOGIN_FORM]:  TEXT_CREATE_ACCOUNT,
@@ -30,14 +31,16 @@ const initialState = {
         name: 'app_user_login',
         type: 'text',
         fieldType: 'input',
-        placeholder: 'Логин'
+        placeholder: 'Логин',
+        error: false,
       },
       {
         value: '',
         name: 'app_user_password',
         type: 'password',
         fieldType: 'input',
-        placeholder: 'Пароль'
+        placeholder: 'Пароль',
+        error: false,
       }
     ]
   },
@@ -45,25 +48,79 @@ const initialState = {
     0: [
       {
         value: '',
-        name: 'app_user_login',
+        name: 'app_new_user_name',
         type: 'text',
         fieldType: 'input',
-        placeholder: '123'
+        placeholder: 'Имя',
+        error: false,
       },
       {
         value: '',
-        name: 'app_user_password',
+        name: 'app_new_user_surname',
+        type: 'text',
+        fieldType: 'input',
+        placeholder: 'Фамилия',
+        error: false,
+      },
+      {
+        value: '',
+        name: 'app_new_user_patronymic',
+        type: 'text',
+        fieldType: 'input',
+        placeholder: 'Отчество',
+        error: false,
+      }
+    ],
+    1: [
+      {
+        value: '',
+        name: 'app_new_user_login',
+        type: 'text',
+        fieldType: 'input',
+        placeholder: 'Логин',
+        error: false,
+      },
+      {
+        value: '',
+        name: 'app_new_user_password',
         type: 'password',
         fieldType: 'input',
-        placeholder: 'Пароль'
+        placeholder: 'Пароль',
+        error: false,
+      },
+      {
+        value: '',
+        name: 'app_new_user_phone',
+        type: 'tel',
+        fieldType: 'input',
+        placeholder: 'Телефон',
+        error: false,
+      }
+    ],
+    2: [
+      {
+        value: '',
+        name: 'app_new_user_language',
+        type: 'text',
+        fieldType: 'select',
+        placeholder: 'Иностранный язык',
+        error: false,
+      },
+      {
+        value: '',
+        name: 'app_new_user_hostel',
+        type: 'text',
+        fieldType: 'checkbox',
+        label: 'Общежитие',
+        error: false,
       }
     ]
-
   }
 };
 
 const LoginRegistrationForm = () => {
   const [state, setState] = useState(initialState);
+
   const {
     title,
     currentForm,
@@ -73,21 +130,95 @@ const LoginRegistrationForm = () => {
   const fields = state[currentForm][step];
 
   const switchForm = () => {
+
     if (currentForm === LOGIN_FORM) {
-      setState(prevState => ({
-        ...prevState,
-        title: TEXT_REGISTRATION,
-        currentForm: REGISTRATION_FORM
-      }))
+      setCurrentForm(TEXT_REGISTRATION, REGISTRATION_FORM);
       return false;
     } else if (currentForm === REGISTRATION_FORM && step === 0) {
+      setCurrentForm(TEXT_ENTER, LOGIN_FORM);
+      return false;
+    } else if (currentForm === REGISTRATION_FORM && step !== 0) {
+      decrementStep()
+    }
+  };
+
+  const setCurrentForm = (title, form) => {
+    setState(prevState => ({
+      ...prevState,
+      title,
+      currentForm: form
+    }));
+  };
+
+  const decrementStep = () => {
+    setState(prevState => ({
+      ...prevState,
+      step: prevState.step - 1
+    }))
+  };
+
+  const onClickButton = () => {
+    if (currentForm === REGISTRATION_FORM && step !== Object.keys(state[REGISTRATION_FORM]).length - 1) {
+      validationFields()
+    }
+  };
+
+  const validationFields = () => {
+    let error = false;
+    const newFields = fields.map(item => {
+      if  (item.value === '') {
+        error = true;
+        return({
+          ...item,
+          error: true
+        })
+      }
+
+      return ({
+        ...item,
+        error: false
+      })
+    });
+
+    if (!error) {
+      incrementStep()
+    } else {
       setState(prevState => ({
         ...prevState,
-        title: TEXT_ENTER,
-        currentForm: LOGIN_FORM
+        [currentForm]: {
+          ...prevState[currentForm],
+          [step]: newFields
+        }
       }))
-      return false;
     }
+  };
+
+  const incrementStep = () => {
+    setState(prevState => ({
+      ...prevState,
+      step: prevState.step + 1
+    }))
+  };
+
+  const onChange = (name, value) => {
+    const newFields = fields.map(item => {
+      if (item.name === name) {
+        return({
+          ...item,
+          value: value,
+          error: false
+        })
+      }
+      return item
+    })
+
+    setState(prevState => ({
+      ...prevState,
+      [currentForm]: {
+        ...prevState[currentForm],
+        [step]: newFields
+      }
+    }))
   };
 
   return (
@@ -100,13 +231,16 @@ const LoginRegistrationForm = () => {
      </div>
      {fields.map((item, key) => (
       <Input
-       kwy={item.name}
+       key={item.name}
        className={cx('login-registration-form__field', {
          'login-registration-form__field--margin--none': fields.length - 1 === key
        })}
        placeholder={item.placeholder}
        type={item.type}
        name={item.name}
+       error={item.error}
+       onChange={onChange}
+       value={item.value}
       />
      ))}
      {currentForm === LOGIN_FORM && (
@@ -122,8 +256,12 @@ const LoginRegistrationForm = () => {
          {linkText[step === 0 ? currentForm : 'back']}
        </div>
        <Button
+        onClick={onClickButton}
        >
-         {TEXT_ENTER}
+         {currentForm === LOGIN_FORM ?
+          TEXT_ENTER : (
+           currentForm === REGISTRATION_FORM && step !== Object.keys(state[currentForm]).length - 1 ? TEXT_NEXT : TEXT_END
+          )}
        </Button>
      </div>
      { currentForm === REGISTRATION_FORM && (

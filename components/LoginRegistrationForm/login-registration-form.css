@@ -66,6 +66,7 @@
     position: absolute;
     bottom: 14px;
     left: 50%;
+    display: flex;
     transform: translateX(-50%);
 }
 

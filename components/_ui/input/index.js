@@ -4,6 +4,8 @@ import cx from 'classnames'
 
 export const Input = ({type, name, value, onChange, onBlur, error, disabled, className, placeholder}) => {
 
+
+
   return (
     <input
       className={cx(`input ${className}`, {
@@ -13,7 +15,7 @@ export const Input = ({type, name, value, onChange, onBlur, error, disabled, cla
       type={type}
       name={name}
       value={value}
-      onChange={onChange}
+      onChange={event => {onChange(name, event.target.value)}}
       onBlur={onBlur}
       disabled={disabled}
       placeholder={placeholder}

@@ -3,14 +3,15 @@ import './button.css'
 
 export const Button =  ({
     Tag = "div",
-    children
-
+    children,
+    onClick
 }) => {
 
 
   return(
    <Tag
     className={"button"}
+    onClick={onClick}
    >
      {children}
    </Tag>
