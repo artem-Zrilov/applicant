@@ -3,6 +3,7 @@ import cx from 'classnames'
 import './login-registration-form.css'
 import {Input} from '../_ui/input'
 import {Button} from "../_ui/button";
+import {Field} from "./field";
 
 const LOGIN_FORM = 'login';
 const REGISTRATION_FORM = 'registration';
@@ -230,17 +231,16 @@ const LoginRegistrationForm = () => {
        {title}
      </div>
      {fields.map((item, key) => (
-      <Input
+      <Field
+       index={key}
        key={item.name}
-       className={cx('login-registration-form__field', {
-         'login-registration-form__field--margin--none': fields.length - 1 === key
-       })}
        placeholder={item.placeholder}
        type={item.type}
        name={item.name}
        error={item.error}
        onChange={onChange}
        value={item.value}
+       fieldsLength={fields.length - 1}
       />
      ))}
      {currentForm === LOGIN_FORM && (
