@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/movies", (req, res) => {
-  res.end(JSON.stringify({
-    value: 'hello'
-  }))
-})
+const userController = new (require('../controllers/userController'));
+
+
+router.post("/registration", userController.add)
 
 
 module.exports = router;

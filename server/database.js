@@ -1,30 +1,44 @@
 const constants = require('../config_const');
 const mysql = require('mysql');
 
-var connection = mysql.createConnection({
+var pool = mysql.createPool({
   host: constants.host,
   user: constants.user,
   database: constants.database,
-  password: constants.password
+  password: constants.password,
+  connectionLimit: 10
 });
 
-class DataBase {
+class Database {
+  all(table, fields = []) {
+    return new Promise((resolve, reject) => {
+      pool.query(`SELECT ${fields.length > 0 ? fields.join(', ') : '*'} FROM ${table}`, (err, result) => {
+        if (err) reject(err);
 
-  all = (table, fields = []) => {
-    this._connect();
-
-    const query = `SELECT ${fields.length !== 0 ? fields.join(', ') : '*' } FROM ${table}`
-
-    this._end()
+        resolve(result)
+      })
+    } )
   }
 
-  _connect = () => {
-    connection.connect();
-  };
+  insert(sql) {
+    return new Promise((resolve, reject) => {
+      pool.query(sql, (err, result) => {
+        if (err) reject(err);
 
-  _end = () => {
-    connection.end();
-  };
+        resolve(result)
+      })
+    })
+  }
+
+  select(sql) {
+    return new Promise((resolve, reject) => {
+      pool.query(sql, (err, result) => {
+        if (err) reject(err);
+
+        resolve(result)
+      })
+    })
+  }
 }
 
-module.exports = DataBase;
+module.exports = Database;

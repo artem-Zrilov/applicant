@@ -1,6 +1,6 @@
 const express = require('express');
 const next = require('next');
-
+var bodyParser = require('body-parser')
 const PORT = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== "production";
 const app = next({dev});
@@ -11,6 +11,7 @@ app.prepare()
      const server = express();
      const apiRoutes = require("./router/index.js");
 
+     server.use(bodyParser.urlencoded({ extended: true }));
      server.use("/api", apiRoutes);
      server.use('/uploads', express.static(__dirname + '/uploads'));
 
