@@ -17,7 +17,10 @@ class  UserController {
          message: err.message
        });
      });
+  }
 
+  login(req, res) {
+    userModel.login(req.body)
   }
 }
 

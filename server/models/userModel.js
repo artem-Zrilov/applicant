@@ -19,22 +19,27 @@ class UserModel {
       language
     } = data;
 
-    const user =  await  db.select(`SELECT * FROM users WHERE login="${login}"`)
+    const user = await db.select(`SELECT * FROM users WHERE login="${login}"`)
 
     if (user.length > 0) {
-      throw Error("Пользователь с данным логином уже существует")
+      throw Error("already registered")
     }
 
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
 
-    await db.insert(`INSERT INTO users (login, password, name, surname, patronymic, phone, language) VALUES('${login}', '${hash}', '${name}', '${surname}', '${patronymic}', '${phone}', '${language}')`)
+    const result = await db.insert(`INSERT INTO users (login, password, name, surname, patronymic, phone, language) VALUES('${login}', '${hash}', '${name}', '${surname}', '${patronymic}', '${phone}', '${language}')`)
 
-    return data;
+    return {
+      id: result.insertId
+    };
   }
 
   async login(data) {
-    const match = await bcrypt.compare('admin123', '$2b$10$I6Uez4aki0qHLRKUbyXzl.SGL3Mmx6JXIBLCl6Lsl/EuKu7gLwYsm');
+
+    const user = await db.select('SELECT * FROM users WHERE login="${login}"');
+
+    const match = await bcrypt.compare(data.password, user.password);
 
     if (match) {
       console.log(true)
